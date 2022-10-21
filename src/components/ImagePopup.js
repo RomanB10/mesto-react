@@ -15,7 +15,6 @@ function ImagePopup({ card, onClose }) {
             aria-label="Закрыть"
             onClick={onClose}
           ></button>
-          {console.log(card)}
           <img
             className="popup__image-place"
             src={card.link}

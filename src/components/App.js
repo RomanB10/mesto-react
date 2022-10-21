@@ -18,18 +18,15 @@ function App() {
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
-    /* document.querySelector('.popup_type_edit-profile').classList.add("popup_opened")*/
   }
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(true);
-    /* document.querySelector('.popup_type_add-card').classList.add("popup_opened")*/
   }
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
-    /* document.querySelector('.popup_type_change-avatar').classList.add("popup_opened")*/
   }
 
-  function handleCardClick(card){
+  function handleCardClick(card) {
     setSelectedCard(card);
   }
 
@@ -38,10 +35,6 @@ function App() {
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
     setSelectedCard(false);
-    /* const array = document.querySelectorAll('.popup')
-  array.forEach((item)=>{
-    item.classList.remove("popup_opened");
-  })*/
   }
 
   //запрос к серверу за данными пользователя
@@ -49,18 +42,16 @@ function App() {
     api
       .getInfoUser()
       .then((data) => {
-        console.log("Успешно ответ с сервера", data);
         const owner = {
           userDescription: data.about,
           src: data.avatar,
           userName: data.name,
           id: data._id,
         };
-        console.log(owner);
         setUser(owner);
       })
       .catch((err) => {
-        console.log("Ошибка запрос не обработан", err);
+        console.log(err);
       });
   }, []);
 
@@ -69,7 +60,6 @@ function App() {
     api
       .getAllCards()
       .then((data) => {
-        console.log("Успешно ответ с сервера КРТОЧКИ", data);
         const results = data.map((item) => ({
           likes: item.likes,
           link: item.link,
@@ -77,11 +67,10 @@ function App() {
           owner: item.owner,
           id: item._id,
         }));
-        console.log(results);
         setCards(results);
       })
       .catch((err) => {
-        console.log("Ошибка запрос не обработан", err);
+        console.log(err);
       });
   }, []);
 
@@ -98,7 +87,7 @@ function App() {
             userName={user.userName}
             userDescription={user.userDescription}
             userAvatar={user.src}
-            cards = {cards}
+            cards={cards}
           />
           <Footer />
           <PopupWithForm
@@ -135,7 +124,7 @@ function App() {
             isOpen={isEditAvatarPopupOpen}
             onClose={closeAllPopups}
           />
-          <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
+          <ImagePopup card={selectedCard} onClose={closeAllPopups} />
         </div>
       </body>
     </div>
@@ -143,4 +132,3 @@ function App() {
 }
 
 export default App;
-/*<ImagePopup card={selectedCard} onClose={closeAllPopups}/>*/

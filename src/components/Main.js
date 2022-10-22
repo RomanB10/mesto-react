@@ -25,7 +25,7 @@ function Main({
             type="submit"
             name="submit"
             onClick={onEditAvatar}
-          ></button>
+          />
         </div>
         <div className="profile__wrapper">
           <div className="profile__info">
@@ -34,14 +34,14 @@ function Main({
               className="profile__edit-btn"
               type="button"
               onClick={onEditProfile}
-            ></button>
+            />
             <p className="profile__subtitle">{userDescription}</p>
           </div>
           <button
             className="profile__add-btn"
             type="button"
             onClick={onAddPlace}
-          ></button>
+          />
         </div>
       </section>
       <section className="content root__section">

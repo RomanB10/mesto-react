@@ -10,7 +10,7 @@ function Card({card, onImageZoom}) {
         className="rectangle__button-trash"
         type="button"
         aria-label="Корзина"
-      ></button>
+      />
       <img
         className="rectangle__image"
         alt={`Здесь должно быть изображение ${card.name}`}
@@ -25,7 +25,7 @@ function Card({card, onImageZoom}) {
             className="rectangle__button"
             type="button"
             aria-label="Лайк"
-          ></button>
+          />
           <p className="rectangle__count-likes">{card.likes.length}</p>
         </div>
       </div>

@@ -13,23 +13,23 @@ function PopupWithForm(props) {
           action="./scripts/script.js"
           method="post"
           name={`${props.name}`}
-          novalidate
-          tabindex="0"
+          noValidate
+          tabIndex="0"
         >
           <button
             className="popup__close-btn"
             type="button"
             aria-label="Закрыть"
-            tabindex="4"
+            tabIndex="4"
             onClick={props.onClose}
-          ></button>
+          />
           <h3 className="popup__title-profile">{props.title}</h3>
           <fieldset className="popup__form-items">{props.children}</fieldset>
           <button
             type="submit"
             name="submit"
             className="popup__submit-btn"
-            tabindex="3"
+            tabIndex="3"
           >
             {props.btnText}
           </button>

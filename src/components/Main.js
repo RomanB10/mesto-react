@@ -1,15 +1,19 @@
 import Card from "./Card";
+import CurrentUserContext from "../contexts/CurrentUserContext"; //импорт контекста
+import { useContext } from "react"; //ипорт хука для использования КОНТЕКСТА
 
 function Main({
-  userAvatar,
-  userName,
-  userDescription,
   onEditAvatar,
   onEditProfile,
   onAddPlace,
   cards,
   onCardClick,
+  onCardLike,
+  onCardDelete,
 }) {
+  const currentUser = useContext(CurrentUserContext); //Подписываемся на контекст
+
+  /*console.log('ПРОВЕРКА', currentUser)*/
   return (
     <main className="main">
       <section className="profile root__section">
@@ -17,7 +21,7 @@ function Main({
           <img
             className="profile__image"
             /*style={{ backgroundImage: `url(${props.userAvatar})` }} //Чтобы подставить URL аватара в контейнер */
-            src={userAvatar}
+            src={currentUser.avatar}
             alt="Здесь должно быть изображение Аватара"
           />
           <button
@@ -29,13 +33,13 @@ function Main({
         </div>
         <div className="profile__wrapper">
           <div className="profile__info">
-            <h1 className="profile__title">{userName}</h1>
+            <h1 className="profile__title">{currentUser.name}</h1>
             <button
               className="profile__edit-btn"
               type="button"
               onClick={onEditProfile}
             />
-            <p className="profile__subtitle">{userDescription}</p>
+            <p className="profile__subtitle">{currentUser.about}</p>
           </div>
           <button
             className="profile__add-btn"
@@ -47,7 +51,13 @@ function Main({
       <section className="content root__section">
         <ul className="photo-grid">
           {cards.map((item) => (
-            <Card key={item.id} card={item} onImageZoom={onCardClick} />
+            <Card
+              key={item._id}
+              card={item}
+              onImageZoom={onCardClick} //Спускае пропс в card
+              onCardLike={onCardLike} //Спускае пропс в card
+              onCardDelete={onCardDelete} //Спускае пропс в card
+            />
           ))}
         </ul>
       </section>

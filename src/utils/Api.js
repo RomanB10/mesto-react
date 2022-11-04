@@ -1,12 +1,12 @@
- class Api {
- /* #onResponse(res){
+class Api {
+  /* #onResponse(res){
      res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
   }*/
   constructor(config) {
     this._url = config.url;
     this._headers = config.headers;
   }
-/*  _getResponse(res) {
+  /*  _getResponse(res) {
     res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
   }*/
 
@@ -16,12 +16,13 @@
       method: "GET",
       headers: this._headers,
     }).then((res) =>
-    res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
-  );
+      res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
+    );
   }
 
   //Добавление новой карточки
   addNewCard(data) {
+    console.log(data)
     return fetch(`${this._url}/v1/cohort-51/cards`, {
       method: "POST",
       headers: this._headers,
@@ -40,28 +41,23 @@
     );
   }
 
-  //Постановка лайка  PUT https://mesto.nomoreparties.co/v1/cohortId/cards/cardId/likes
-  addLike(idCard) {
-    return fetch(`${this._url}/v1/cohort-51/cards/${idCard}/likes`, {
-      method: "PUT",
-      headers: this._headers,
-    }).then((res) =>
-      res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
-    );
-  }
+  //Установка и снятие лайка (PUT,DELETE) https://mesto.nomoreparties.co/v1/cohortId/cards/cardId/likes
 
-  ///Cнятие лайка DELETE https://mesto.nomoreparties.co/v1/cohortId/cards/cardId/likes
-  deleteLike(idCard) {
-    return fetch(`${this._url}/v1/cohort-51/cards/${idCard}/likes`, {
-      method: "DELETE",
-      headers: this._headers,
-    }).then((res) =>
+  changeLikeCardStatus(idCard, isLiked) {
+    console.log("Вывели в API", idCard);
+    const addLike = { method: "PUT", headers: this._headers };
+    const deleteLike = { method: "DELETE", headers: this._headers };
+
+    return fetch(
+      `${this._url}/v1/cohort-51/cards/${idCard}/likes`,
+      isLiked ? deleteLike : addLike
+    ).then((res) =>
       res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
     );
   }
 
   //Загрузка информации о пользователе с сервера
-  getInfoUser() {
+  getUserInfo() {
     return fetch(`${this._url}/v1/cohort-51/users/me`, {
       headers: this._headers,
     }).then((res) =>
@@ -69,33 +65,35 @@
     );
   }
 
-  //Редактирование профиля на сервере
-  editInfoUser(data) {
+  //Обновление данных пользователя (name, about)
+  setUserInfo(data) {
     return fetch(`${this._url}/v1/cohort-51/users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
         name: data.name,
-        about: data.job,
+        about: data.about,
       }),
     }).then((res) =>
       res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
     );
   }
 
-  //Смена АВАТАРА полбьзователя
-  changeAvatarUser(data) {
+  //Обновление аватара пользователя (avatar)
+  setUserAvatar(data) {
     return fetch(`${this._url}/v1/cohort-51/users/me/avatar/`, {
       method: "PATCH",
       headers: this._headers,
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        avatar: data.avatar,
+      }),
     }).then((res) =>
       res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
     );
   }
 }
 
-//Прямо внутри api.js создайте экземпляр класса Api с нужными параметрами (включая ваш токен) 
+//Прямо внутри api.js создайте экземпляр класса Api с нужными параметрами (включая ваш токен)
 //и экспортируйте этот экземпляр вместо самого класса.
 const api = new Api({
   url: "https://mesto.nomoreparties.co",

@@ -15,6 +15,7 @@ function PopupWithForm(props) {
           name={`${props.name}`}
           noValidate
           tabIndex="0"
+          onSubmit={props.onSubmit}
         >
           <button
             className="popup__close-btn"

@@ -22,7 +22,6 @@ class Api {
 
   //Добавление новой карточки
   addNewCard(data) {
-    console.log(data)
     return fetch(`${this._url}/v1/cohort-51/cards`, {
       method: "POST",
       headers: this._headers,
@@ -44,7 +43,6 @@ class Api {
   //Установка и снятие лайка (PUT,DELETE) https://mesto.nomoreparties.co/v1/cohortId/cards/cardId/likes
 
   changeLikeCardStatus(idCard, isLiked) {
-    console.log("Вывели в API", idCard);
     const addLike = { method: "PUT", headers: this._headers };
     const deleteLike = { method: "DELETE", headers: this._headers };
 

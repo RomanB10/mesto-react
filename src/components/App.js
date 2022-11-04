@@ -80,7 +80,6 @@ function App() {
     api
       .addNewCard(data)
       .then((dataFromServer) => {
-        console.log(dataFromServer);
         const newCard = dataFromServer;
         setCards([newCard, ...cards]); //при сеттере необходимо создавать новый массив, клонируя предыдущий ...spread
         closeAllPopups();
@@ -90,19 +89,15 @@ function App() {
       });
   }
 
-
   //Функция установки лайков
   function handleCardLike(card) {
-    console.log("APP.js   НАЖАЛИ ЛАЙК", card);
     //Проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
-    console.log("Карточку уже лайкнули?", isLiked);
 
     //Отправляем запрос в API и получаем обновленные данные карточки
     api
       .changeLikeCardStatus(card._id, isLiked)
       .then((cardFromServer) => {
-        console.log("cardFromServer", cardFromServer);
         /* const updatedCards = cards.map(function(item){return(item._id === card._id ? cardFromServer : item)})
       setCards(updatedCards)//обновляем стейт карточек локально*/
         setCards((state) =>
@@ -154,42 +149,44 @@ function App() {
   }, []);
 
   return (
-    <div className="page root__section">
-      <CurrentUserContext.Provider value={currentUser}>
-        <Header />
-        <Main
-          onEditProfile={handleEditProfileClick}
-          onAddPlace={handleAddPlaceClick}
-          onEditAvatar={handleEditAvatarClick}
-          onCardClick={handleCardClick}
-          onCardLike={handleCardLike}
-          onCardDelete={handleCardDelete}
-          cards={cards}
-        />
-        <Footer />
-        <EditProfilePopup
-          isOpen={isEditProfilePopupOpen}
-          onClose={closeAllPopups}
-          onUpdateUser={handleUpdateUser}
-        />
-        <AddPlacePopup
-          isOpen={isAddPlacePopupOpen}
-          onClose={closeAllPopups}
-          onAddPlace={handleAddPlaceSubmit}
-        />
-        <PopupWithForm
-          id="3"
-          name="confirmation"
-          title="Вы уверены?"
-          btnText="Да"
-        />
-        <EditAvatarPopup
-          isOpen={isEditAvatarPopupOpen}
-          onClose={closeAllPopups}
-          onUpdateAvatar={handleUpdateAvatar}
-        />
-        <ImagePopup card={selectedCard} onClose={closeAllPopups} />
-      </CurrentUserContext.Provider>
+    <div className="root">
+      <div className="page root__section">
+        <CurrentUserContext.Provider value={currentUser}>
+          <Header />
+          <Main
+            onEditProfile={handleEditProfileClick}
+            onAddPlace={handleAddPlaceClick}
+            onEditAvatar={handleEditAvatarClick}
+            onCardClick={handleCardClick}
+            onCardLike={handleCardLike}
+            onCardDelete={handleCardDelete}
+            cards={cards}
+          />
+          <Footer />
+          <EditProfilePopup
+            isOpen={isEditProfilePopupOpen}
+            onClose={closeAllPopups}
+            onUpdateUser={handleUpdateUser}
+          />
+          <AddPlacePopup
+            isOpen={isAddPlacePopupOpen}
+            onClose={closeAllPopups}
+            onAddPlace={handleAddPlaceSubmit}
+          />
+          <PopupWithForm
+            id="3"
+            name="confirmation"
+            title="Вы уверены?"
+            btnText="Да"
+          />
+          <EditAvatarPopup
+            isOpen={isEditAvatarPopupOpen}
+            onClose={closeAllPopups}
+            onUpdateAvatar={handleUpdateAvatar}
+          />
+          <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+        </CurrentUserContext.Provider>
+      </div>
     </div>
   );
 }

@@ -8,12 +8,10 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
 
     function handleChangeName(event){
         setName(event.target.value);
-        console.log('Значение ИМЯ:', name)
     }
       
     function handleChangeLink(event){
         setLink(event.target.value);
-        console.log('Значение сылка:',link)
     }
 
     function handleSubmit(event){

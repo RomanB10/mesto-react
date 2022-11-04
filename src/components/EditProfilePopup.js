@@ -13,12 +13,10 @@ function EditProfilePopup({ isOpen, onClose,onUpdateUser }) {
 
     function handleChangeName(event){
         setName(event.target.value);
-        console.log('Значение ИМЯ:', name)
     }
       
     function handleChangeDescription(event){
         setDescription(event.target.value);
-        console.log('Значение О себе:',description)
     }
 
     function handleSubmit(event){

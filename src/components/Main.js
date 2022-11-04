@@ -13,7 +13,6 @@ function Main({
 }) {
   const currentUser = useContext(CurrentUserContext); //Подписываемся на контекст
 
-  /*console.log('ПРОВЕРКА', currentUser)*/
   return (
     <main className="main">
       <section className="profile root__section">

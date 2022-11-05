@@ -15,7 +15,7 @@ function Card({ card, onImageZoom, onCardLike, onCardDelete }) {
   //Определяем, есть ли у карточки лайк, поставленный тукущим пользователем
   const isLiked = card.likes.some(function (item) {
     return item._id === currentUser._id;
-  }); //можно оптимизировать (i => i._id === currentUser._id)
+  }); 
   //Создаем переменную, которую после задаем в `className` для КНОПКИ ЛАЙКА
   const cardLikeButtonClassName = `rectangle__button ${
     isLiked && `rectangle__button_active`
@@ -36,7 +36,6 @@ function Card({ card, onImageZoom, onCardLike, onCardDelete }) {
   return (
     <li className="rectangle">
       <button
-        /*className="rectangle__button-trash"*/
         className={cardDeleteButtonClassName}
         type="button"
         aria-label="Корзина"
@@ -46,14 +45,12 @@ function Card({ card, onImageZoom, onCardLike, onCardDelete }) {
         className="rectangle__image"
         alt={`Здесь должно быть изображение ${card.name}`}
         src={card.link}
-        /*style={{ backgroundImage: `url(${link})`}} //альтернативный способ*/
         onClick={handleClick}
       />
       <div className="rectangle__title">
         <h2 className="rectangle__text">{card.name}</h2>
         <div className="rectangle__group-like">
           <button
-            /*className="rectangle__button"*/
             className={cardLikeButtonClassName}
             type="button"
             aria-label="Лайк"

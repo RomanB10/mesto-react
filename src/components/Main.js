@@ -19,7 +19,6 @@ function Main({
         <div className="profile__container">
           <img
             className="profile__image"
-            /*style={{ backgroundImage: `url(${props.userAvatar})` }} //Чтобы подставить URL аватара в контейнер */
             src={currentUser.avatar}
             alt="Здесь должно быть изображение Аватара"
           />

@@ -98,9 +98,7 @@ function App() {
     api
       .changeLikeCardStatus(card._id, isLiked)
       .then((cardFromServer) => {
-        /* const updatedCards = cards.map(function(item){return(item._id === card._id ? cardFromServer : item)})
-      setCards(updatedCards)//обновляем стейт карточек локально*/
-        setCards((state) =>
+        setCards((state) =>//вместо значения в setCards передаем функцию, первый параметр (state)которой-текущий стейт
           state.map((item) => (item._id === card._id ? cardFromServer : item))
         ); //обновляем стейт карточек */
       })

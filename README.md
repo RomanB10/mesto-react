@@ -14,7 +14,7 @@
 
 
 **Ссылка на сайт**
-* [https://romanb10.github.io/mesto-react/index.html](https://romanb10.github.io/mesto-react/index.html)
+* [https://romanb10.github.io/mesto-react/](https://romanb10.github.io/mesto-react/)
 
 **Стэк**
 * HTML
